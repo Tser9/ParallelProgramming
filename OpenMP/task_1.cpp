@@ -1,10 +1,8 @@
 #include <iostream>
-#include <fstream>
 #include <iomanip>
 #include <omp.h>
 
 int main12() {
-    std::cout << "task1 - calculating PI" << std::endl;
 
     const intptr_t N = 12;
     const intptr_t arr_treads[] = { 1, 2, 4, 8, 10, 12 };
