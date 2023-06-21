@@ -2,7 +2,7 @@
 #include <omp.h>
 
 
-int main0() {
+int main() {
     intptr_t n = 1e9;
     intptr_t sum = 0;
     intptr_t* A = new intptr_t[n];
