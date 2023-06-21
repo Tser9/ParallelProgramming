@@ -13,19 +13,18 @@ int main(int argc, char** argv)
 	MPI_Init(&argc, &argv);
 	MPI_Comm_size(MPI_COMM_WORLD, &maxThread);
 	MPI_Comm_rank(MPI_COMM_WORLD, &thread);
-
+	
+	start = MPI_Wtime();
 	if (thread == 0)
 	{
 		N = 1e6;
 		for (int i = 1; i < maxThread; i++){
 			MPI_Send(&N, 1, MPI_UNSIGNED_LONG_LONG, i, 0, MPI_COMM_WORLD);
-			cout << 'q';
 		}
 	}
 
 	MPI_Status status;
 
-	start = MPI_Wtime();
 	if (thread != 0)
 		MPI_Recv(&N, 1, MPI_UNSIGNED_LONG_LONG, 0, 0, MPI_COMM_WORLD, &status);
 
