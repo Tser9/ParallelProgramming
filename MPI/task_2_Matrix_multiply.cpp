@@ -69,7 +69,6 @@ int main(int argc, char** argv)
 				c[(rc * i + ost) * n + x] = lc[x];
 		}
 
-		cout << "time  " << (MPI_Wtime() - time)*1000 << endl;
 	}
 	else
 	{
@@ -95,6 +94,7 @@ int main(int argc, char** argv)
 	} 
 
 
+		cout << "time  " << (MPI_Wtime() - time)*1000 << endl;
 	delete[] a, b, c, lc;
 
 	MPI_Finalize();
