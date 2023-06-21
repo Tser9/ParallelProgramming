@@ -3,7 +3,6 @@
 #include <omp.h>
 
 int main3() {
-    std::cout << "task3 - matrix multiply" << std::endl;
     srand(time(NULL));
     intptr_t n = 1e3;
     intptr_t** A = new intptr_t * [n];
