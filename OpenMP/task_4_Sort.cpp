@@ -2,7 +2,7 @@
 #include <random>
 #include <omp.h>
 
-void merge(intptr_t* arr,  intptr_t a, intptr_t c,  intptr_t b) {
+void merge(intptr_t* arr, intptr_t a, intptr_t c, intptr_t b) {
     const intptr_t N1 = c - a + 1;
     const intptr_t N2 = b - c;
 
@@ -45,14 +45,14 @@ void merge(intptr_t* arr,  intptr_t a, intptr_t c,  intptr_t b) {
 
 }
 
-void parallelMergeSort(intptr_t* arr,  intptr_t a,  intptr_t b) {
+void MergeSort(intptr_t* arr, intptr_t a, intptr_t b) {
     if (a >= b)
         return;
     intptr_t m = a + (b - a) / 2;
 #pragma omp task
-    parallelMergeSort(arr, a, m);
+    MergeSort(arr, a, m);
 #pragma omp task
-    parallelMergeSort(arr, m + 1, b);
+    MergeSort(arr, m + 1, b);
 
     merge(arr, a, m, b);
 }
@@ -61,16 +61,16 @@ int main() {
 
     const intptr_t N = 1e6;
     srand(time(NULL));
-    intptr_t* arr1 = new intptr_t[N];
+    intptr_t* arr = new intptr_t[N];
     for (intptr_t i = 0; i < N; ++i) {
-        arr1[i] = 100 - rand() % 200;
+        arr[i] = 100 - rand() % 200;
     }
 
     double start = omp_get_wtime();
 #pragma omp parallel
     {
 #pragma omp single
-        parallelMergeSort(arr1, 0, N - 1);
+        MergeSort(arr, 0, N - 1);
     }
     double end = omp_get_wtime();
     std::cout << "Time in ms: " << (end - start) * 1000 << std::endl;
